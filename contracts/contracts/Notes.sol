@@ -1,4 +1,5 @@
 pragma solidity ^0.4.23;
+pragma experimental ABIEncoderV2;
 
 contract Notes {
   uint count;
@@ -9,6 +10,7 @@ contract Notes {
     string encrypted;
     address author;
     address[] sharedWith;
+    string encryptedKey;
   }
 
   mapping (uint => Note) notes;
@@ -19,12 +21,13 @@ contract Notes {
     count = 0;
   }
 
-  function addNote(string memory tag, string memory encrypted, address author, address[] memory sharedWith) public {
+  function addNote(string memory tag, string memory encrypted, address author, address[] memory sharedWith, string memory encryptedKey) public {
     Note memory note = Note({
       tag: tag,
       encrypted: encrypted,
       author: author,
-      sharedWith: sharedWith
+      sharedWith: sharedWith,
+      encryptedKey: encryptedKey
     });
 
     notes[count] = note;

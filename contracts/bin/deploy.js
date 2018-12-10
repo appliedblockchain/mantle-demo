@@ -38,14 +38,16 @@ files.forEach(file => {
     }
 
     const Notes = await deployContract(contracts, 'Notes')
+    console.log('NOTES*******', Notes)
 
     const contractsJSON = `module.exports = ${
       JSON.stringify({
-        Notes: { address: Notes.options.address }
+        Notes: { address: Notes.options.address, abi: Notes._jsonInterface }
       }, null, 2).replace(/"/g, '\'')
     }\n`
 
-    const path = join(__dirname, '../details.js')
+    // const path = join(__dirname, '../details.js')
+    const path = join(__dirname, '../../react/src/details.js')
     fs.writeFileSync(path, contractsJSON)
     console.log(`Contract information saved at ${path}`)
   } catch (err) {

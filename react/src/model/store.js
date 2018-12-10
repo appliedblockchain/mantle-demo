@@ -8,7 +8,7 @@ import thunk from 'redux-thunk'
 
 const reducer = combineReducers({ auth, notes })
 
-const persistConfig = { storage, key: 'root' }
+const persistConfig = { storage, key: 'root', blacklist: [ 'notes' ] }
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 const enhancers = compose(
