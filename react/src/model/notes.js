@@ -1,11 +1,23 @@
+import Mantle from '@appliedblockchain/mantle-core'
+
 /* ACTION */
 const CREATE_NOTE = '@app/createNote'
 
 /* ACTION CREATORS */
-export const createNote = ({ tag, msg }) => ({
-  type: CREATE_NOTE,
-  payload: { tag, msg }
-})
+export const createNote = ({ tag, msg }) => {
+  return (dispatch, getState) => {
+    const { auth } = getState()
+    const symmetricKey = Mantle.createSymmetricKey()
+    const encrypted = Mantle.encryptSymmetric(msg, symmetricKey)
+    const encryptedKey = Mantle.encrypt(symmetricKey, auth.publicKey)
+
+    dispatch({
+      type: CREATE_NOTE,
+      payload: { tag, encrypted, encryptedKey }
+    })
+  }
+}
+
 
 const INITIAL_STATE = []
 

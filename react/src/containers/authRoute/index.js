@@ -8,8 +8,8 @@ const AuthRoute = ({ authenticated, ...props }) => (
   </>
 )
 
-const mapState = ({ mnemonic }) => ({
-  authenticated: !!mnemonic
+const mapState = ({ auth }) => ({
+  authenticated: !!auth.mnemonic
 })
 
 export default connect(mapState)(AuthRoute)

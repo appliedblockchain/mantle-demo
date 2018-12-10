@@ -17,14 +17,20 @@ const CreateNote = ({ notes, classes }) => {
         <Grid item xs={10}>
           <Typography variant='h2'>Notes</Typography>
         </Grid>
-        { notes.map(note => (
+        { notes ? notes.map(note => (
           <Grid item xs={10}>
             <Paper className={classes.paper}>
               <Text>Tag: {note.tag}</Text>
               <Text>Note: {note.msg}</Text>
             </Paper>
           </Grid>
-        )) } 
+        )) : (
+        <Grid item xs={10}>
+          <Paper className={classes.paper}>
+            <Text>No notes available</Text>
+          </Paper>
+        </Grid>
+        ) } 
       </Grid>
     </div>
   )
