@@ -176,7 +176,6 @@ class Encryption extends Component {
   }
 }
 
-
 export default compose(
   withSnackbar,
   withStyles(styles)

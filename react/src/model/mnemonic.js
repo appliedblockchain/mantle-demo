@@ -1,9 +1,9 @@
 /* ACTION */
-const GENERATE_MNEMONIC = '@app/generateMnemonic'
+const LOAD_MNEMONIC = '@app/loadMnemonic'
 
 /* ACTION CREATORS */
-export const generateMnemonic = mnemonic => ({
-  type: GENERATE_MNEMONIC,
+export const loadMnemonic = mnemonic => ({
+  type: LOAD_MNEMONIC,
   payload: mnemonic
 })
 
@@ -12,7 +12,7 @@ const INITIAL_STATE = ''
 /* UPDATE */
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GENERATE_MNEMONIC:
+    case LOAD_MNEMONIC:
       return action.payload
     default:
       return state

@@ -6,10 +6,10 @@ import Button from '@material-ui/core/Button'
 import Mantle from '@appliedblockchain/mantle-core'
 
 const Home = props => {
-  const handleGenerateMnemonic = () => {
-    const { history, generateMnemonic } = props
+  const handleLoadMnemonic = () => {
+    const { history, loadMnemonic } = props
     const mnemonic = Mantle.generateMnemonic()
-    generateMnemonic(mnemonic)
+    loadMnemonic(mnemonic)
     history.push('/mnemonic')
   }
 
@@ -21,8 +21,8 @@ const Home = props => {
             fullWidth
             color='primary'
             variant='contained'
-            onClick={handleGenerateMnemonic}>
-            Generate Mnemonic
+            onClick={handleLoadMnemonic}>
+              Generate Mnemonic
           </Button>
         </Grid>
         <Grid item xs={12}>
@@ -31,7 +31,7 @@ const Home = props => {
             color='primary'
             variant='contained'
             to='/load-mnemonic'>
-            Load mnemonic
+              Load mnemonic
           </LinkButton>
         </Grid>
       </Grid>
