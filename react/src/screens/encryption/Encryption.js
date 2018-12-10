@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper'
 import VpnKey from '@material-ui/icons/VpnKey'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
-import SideMenu from 'containers/sideMenu';
+import SideMenu from 'containers/sideMenu'
 
 class Encryption extends Component {
   constructor(props) {

@@ -3,8 +3,9 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import window from 'global'
 import mnemonic from './mnemonic'
+import notes from './notes'
 
-const reducer = combineReducers({ mnemonic })
+const reducer = combineReducers({ mnemonic, notes })
 
 const persistConfig = { storage, key: 'root' }
 const persistedReducer = persistReducer(persistConfig, reducer)
