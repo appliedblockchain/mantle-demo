@@ -1,3 +1,8 @@
 import ViewNotes from './ViewNotes'
+import { connect } from 'react-redux'
 
-export default ViewNotes
+const mapState = ({ notes }) => ({
+  notes
+})
+
+export default connect(mapState)(ViewNotes)

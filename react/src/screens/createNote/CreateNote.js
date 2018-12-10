@@ -10,6 +10,7 @@ import SideMenu from 'containers/sideMenu'
 import { TextField } from 'components/formik'
 import Button from '@material-ui/core/Button'
 import { Formik, Form } from 'formik'
+import Typography from '@material-ui/core/Typography'
 import * as Yup from 'yup'
 
 const CreateNote = ({ classes, createNote }) => {
@@ -21,7 +22,7 @@ const CreateNote = ({ classes, createNote }) => {
   const CreateNoteSchema = Yup.object().shape({
     tag: Yup.string()
       .required('Required'),
-    note: Yup.string()
+    msg: Yup.string()
       .min(10, 'Too short')
       .required('Required')
   })
@@ -31,8 +32,10 @@ const CreateNote = ({ classes, createNote }) => {
       <SideMenu />
       <Grid container justify='center' spacing={24}>
         <Grid item xs={10}>
+          <Typography variant='h2'>Create a note</Typography>
+        </Grid>
+        <Grid item xs={10}>
           <Paper className={classes.paper}>
-            <Text className={classes.heading}>Create a new note</Text>
               <Formik
                 initialValues={{ tag: '', msg: '' }}
                 validationSchema={CreateNoteSchema}
@@ -58,7 +61,7 @@ const CreateNote = ({ classes, createNote }) => {
                       </Grid>
                       <Grid item xs={12} className={classes.alignRight}>
                           <Button type='submit' color='primary' variant='contained' disabled={!props.isValid}>
-                            Create note
+                            Create
                           </Button>
                         </Grid> 
                     </Grid>

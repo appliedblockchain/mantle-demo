@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Text from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
@@ -77,6 +78,9 @@ class Encryption extends Component {
       <div className={classes.container}>
         <SideMenu />
         <Grid container justify='center' spacing={24}>
+          <Grid item xs={10}>
+            <Typography variant='h2'>Encryption</Typography>
+          </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paper}>
               <Text>Account details</Text>
