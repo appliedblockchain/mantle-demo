@@ -1,6 +1,6 @@
 module.exports = {
   'Notes': {
-    'address': '0x5C81f66A68F184AC8B60b638B9Df1fda16C33b76',
+    'address': '0xf693dA759bF111Ec06E82d59C79098A8Df259ac1',
     'abi': [
       {
         'inputs': [],
@@ -93,6 +93,10 @@ module.exports = {
           {
             'name': 'sharedWith',
             'type': 'address[]'
+          },
+          {
+            'name': 'encryptedKey',
+            'type': 'string'
           }
         ],
         'payable': false,

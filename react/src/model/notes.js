@@ -10,15 +10,21 @@ const FETCH_NOTES = '@app/fetchNotes'
 /* ACTION CREATORS */
 export const fetchNotes = () => {
   return async (dispatch, getState) => {
-    const { auth: { publicKey, address } } = getState()
+    const { auth: { address, mnemonic } } = getState()
     const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
     const contract = new web3.eth.Contract(Contracts.Notes.abi, Contracts.Notes.address)
     const count = await contract.methods.getNoteCount().call()
     const notes = []
+    const mantle = new Mantle()
+    mantle.loadMnemonic(mnemonic)
     for (let i = 0; i < count; i++) {
       const note = await contract.methods.getNote(i).call()
-      notes.push(note)
+      const viewable = note.sharedWith.includes(address)
+      const key = viewable ? Mantle.decrypt(note.encryptedKey, mantle.getPrivateKey('hex')) : note.encryptedKey
+      const decrypted = viewable ? Mantle.decryptSymmetric(note.encrypted, key) : note.encrypted
+
+      notes.push({ ...note, decrypted, viewable })
     }
 
     dispatch({

@@ -41,7 +41,10 @@ class ViewNotes extends Component {
             <Grid item xs={10} key={idx}>
               <Paper className={classes.paper}>
                 <Text>Tag: {note.tag}</Text>
-                <Text>Note: {JSON.stringify(note.encrypted)}</Text>
+                { note.viewable
+                  ? <Text>{note.decrypted}</Text>
+                  : <Text>This note has not been shared with you</Text>
+                }
               </Paper>
             </Grid>
           )) : (

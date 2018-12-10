@@ -39,8 +39,8 @@ contract Notes {
     return count;
   }
 
-  function getNote(uint id) public view returns (string memory tag, string memory encrypted, address author, address[] memory sharedWith) {
+  function getNote(uint id) public view returns (string memory tag, string memory encrypted, address author, address[] memory sharedWith, string memory encryptedKey) {
     Note memory note = notes[id];
-    return (note.tag, note.encrypted, note.author, note.sharedWith);
+    return (note.tag, note.encrypted, note.author, note.sharedWith, note.encryptedKey);
   }
 }

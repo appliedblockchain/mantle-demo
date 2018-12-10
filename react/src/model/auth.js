@@ -27,7 +27,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       const publicKey = mantle.getPublicKey('hex0x')
       const address = mantle.address
 
-      return { ...state, mantle, mnemonic, publicKey, address }
+      return { ...state, mnemonic, publicKey, address }
     }
     default:
       return state
