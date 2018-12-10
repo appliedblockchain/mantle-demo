@@ -13,10 +13,16 @@ import { Formik, Form } from 'formik'
 import Typography from '@material-ui/core/Typography'
 import * as Yup from 'yup'
 
-const CreateNote = ({ classes, createNote }) => {
-  const onSubmit = ({ tag, msg }) => {
-    const note = { tag, msg }
-    createNote(note)
+const CreateNote = ({ classes, createNote, enqueueSnackbar }) => {
+  const onSubmit = async ({ tag, msg }, { resetForm }) => {
+    try {
+      const note = { tag, msg }
+      await createNote(note)
+      enqueueSnackbar('Note successfully created', { variant: 'success' })
+      resetForm({})
+    } catch (err) {
+      enqueueSnackbar('Note creation failed', { variant: 'error' })
+    }
   }
 
   const CreateNoteSchema = Yup.object().shape({
@@ -24,7 +30,8 @@ const CreateNote = ({ classes, createNote }) => {
       .required('Required'),
     msg: Yup.string()
       .min(10, 'Too short')
-      .required('Required')
+      .required('Required'),
+    sharedWith: Yup.array()
   })
 
   return (
