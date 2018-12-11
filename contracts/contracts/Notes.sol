@@ -3,14 +3,13 @@ pragma experimental ABIEncoderV2;
 
 contract Notes {
   uint count;
-  mapping (address => uint) users;
 
   struct Note {
     string tag;
     string encrypted;
     address author;
-    address[] sharedWith;
-    string encryptedKey;
+    string[] sharedWith; // addresses
+    string[] encryptedKeys; // encrypted public keys
   }
 
   mapping (uint => Note) notes;
@@ -21,13 +20,13 @@ contract Notes {
     count = 0;
   }
 
-  function addNote(string memory tag, string memory encrypted, address author, address[] memory sharedWith, string memory encryptedKey) public {
+  function addNote(string memory tag, string memory encrypted, address author, string[] memory sharedWith, string[] memory encryptedKeys) public {
     Note memory note = Note({
       tag: tag,
       encrypted: encrypted,
       author: author,
       sharedWith: sharedWith,
-      encryptedKey: encryptedKey
+      encryptedKeys: encryptedKeys
     });
 
     notes[count] = note;
@@ -39,8 +38,8 @@ contract Notes {
     return count;
   }
 
-  function getNote(uint id) public view returns (string memory tag, string memory encrypted, address author, address[] memory sharedWith, string memory encryptedKey) {
+  function getNote(uint id) public view returns (string memory tag, string memory encrypted, address author, string[] memory sharedWith, string[] memory encryptedKeys) {
     Note memory note = notes[id];
-    return (note.tag, note.encrypted, note.author, note.sharedWith, note.encryptedKey);
+    return (note.tag, note.encrypted, note.author, note.sharedWith, note.encryptedKeys);
   }
 }

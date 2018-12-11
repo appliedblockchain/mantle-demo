@@ -2,6 +2,7 @@ const fs = require('fs')
 const { join } = require('path')
 const Web3 = require('web3')
 const config = require('config')
+const Mantle = require('@appliedblockchain/mantle-core')
 const PROVIDER = config.get('provider')
 const FROM = config.get('from')
 
@@ -38,14 +39,33 @@ files.forEach(file => {
     }
 
     const Notes = await deployContract(contracts, 'Notes')
-    console.log('NOTES*******', Notes)
+    const Users = await deployContract(contracts, 'Users')
 
     const contractsJSON = `module.exports = ${
       JSON.stringify({
-        Notes: { address: Notes.options.address, abi: Notes._jsonInterface }
+        Notes: { address: Notes.options.address, abi: Notes._jsonInterface },
+        Users: { address: Users.options.address, abi: Users._jsonInterface }
       }, null, 2).replace(/"/g, '\'')
     }\n`
 
+    // Generate default users for demonstration purposes
+
+    const user1 = new Mantle()
+    user1.loadMnemonic('exchange stove lunar piece impact range fall ketchup night hunt resource burden')
+
+    const user2 = new Mantle()
+    user2.loadMnemonic('license dish memory enemy mammal alley garage edge supreme join rival tree')
+
+    const created = await Users.methods
+      .addUser(user1.address, user1.getPublicKey('hex0x'), 'User 1')
+      .send(sendParams)
+
+    console.log('CREATED *', created)
+    await Users.methods
+      .addUser(user2.address, user2.getPublicKey('hex0x'), 'User 2')
+      .send(sendParams)
+
+    // TODO: Change path to a reasonable location
     // const path = join(__dirname, '../details.js')
     const path = join(__dirname, '../../react/src/details.js')
     fs.writeFileSync(path, contractsJSON)

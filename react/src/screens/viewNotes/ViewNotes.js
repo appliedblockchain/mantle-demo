@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import Paper from '@material-ui/core/Paper'
 import SideMenu from 'containers/sideMenu'
 import Typography from '@material-ui/core/Typography'
+import { fetchUsers } from '../../model/users';
 
 class ViewNotes extends Component {
   constructor(props) {
@@ -18,8 +19,9 @@ class ViewNotes extends Component {
   }
 
   componentDidMount() {
-    const { fetchNotes } = this.props
+    const { fetchNotes, fetchUsers } = this.props
     fetchNotes()
+    // fetchUsers()
     // console.log('NOTES', notes)
     // this.setState({ notes })
   }

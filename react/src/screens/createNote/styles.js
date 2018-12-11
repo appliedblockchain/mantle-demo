@@ -10,11 +10,14 @@ const styles = theme => {
       padding: `${unit * 2}px`,
       wordBreak: 'break-word'
     },
-    heading: {
+    marginBottom: {
       marginBottom: `${unit * 2}px`
     },
     alignRight: {
       textAlign: 'right'
+    },
+    sharing: {
+      color: '#6cc3ce'
     }
   }
 }
