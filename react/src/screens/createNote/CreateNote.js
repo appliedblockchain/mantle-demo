@@ -118,12 +118,12 @@ class CreateNote extends Component {
                   <Paper className={classes.paper}>
                     <Typography variant='h5' className={classes.marginBottom}>
                       {user.name}
-                      {this.state.sharedWith.has(user.addr) && <span className={classes.sharing}>&nbsp; (Sharing)</span>}
+                      {this.state.sharedWith.has(user.pubKey) && <span className={classes.sharing}>&nbsp; (Sharing)</span>}
                     </Typography>
                     <Text className={classes.marginBottom}>Address: {user.addr}</Text>
                     <Text className={classes.marginBottom}>Public key: {user.pubKey}</Text>
-                    <IconButton onClick={() => this.toggleShare(user.addr)}>
-                      { this.state.sharedWith.has(user.addr)
+                    <IconButton onClick={() => this.toggleShare(user.pubKey)}>
+                      { this.state.sharedWith.has(user.pubKey)
                           ? <RemoveCircle />
                           : <AddCircle />
                       }

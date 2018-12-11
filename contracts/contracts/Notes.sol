@@ -8,8 +8,8 @@ contract Notes {
     string tag;
     string encrypted;
     address author;
-    string[] sharedWith; // addresses
-    string[] encryptedKeys; // encrypted public keys
+    string[] sharedWith; // public keys
+    string[] encryptedKeys; // encrypted symmetric key
   }
 
   mapping (uint => Note) notes;
