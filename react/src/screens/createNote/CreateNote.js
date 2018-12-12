@@ -50,7 +50,7 @@ class CreateNote extends Component {
     const { classes, users, createNote, enqueueSnackbar } = this.props
     const sharedWith = Array.from(this.state.sharedWith)
 
-    const onSubmit = async({ tag, msg }, { resetForm }) => {
+    const onSubmit = async ({ tag, msg }, { resetForm }) => {
       try {
         const note = { tag, msg, sharedWith }
         await createNote(note)

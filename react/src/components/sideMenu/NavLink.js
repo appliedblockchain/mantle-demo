@@ -7,14 +7,14 @@ import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import styles from './styles'
 
-const NavLink = ({ to, location, classes, tooltip, icon: Icon }) => {
+const NavLink = ({ to, location, classes, customStyles, tooltip, icon: Icon }) => {
   const rootProps = {
     to,
     component: Link
   }
 
   return (
-    <Tooltip title={tooltip} placement="right" className={classes.container} {...rootProps}>
+    <Tooltip title={tooltip} placement="right" className={`${classes.container} ${customStyles}`} {...rootProps}>
       <IconButton>
         <Icon className={location.pathname === to ? classes.selected : null} />
       </IconButton>

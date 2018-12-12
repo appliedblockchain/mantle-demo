@@ -87,7 +87,7 @@ export const createNote = ({ tag, msg, sharedWith = [] }) => {
         }
       })
     } catch (err) {
-      console.log('ERR', err)
+      throw err
     }
   }
 }
