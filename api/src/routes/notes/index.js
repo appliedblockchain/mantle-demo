@@ -1,7 +1,7 @@
 const koaRouter = require('koa-joi-router')
 const Joi = koaRouter.Joi
 const router = koaRouter()
-const { web3, contracts: { Notes } } = require('src/utils/web3')
+const { contracts: { Notes } } = require('src/utils/web3')
 
 const routes = [
   {

@@ -1,8 +1,5 @@
 import Mantle from '@appliedblockchain/mantle-core'
-import Web3 from 'web3'
-import Contracts from 'details.js'
 import api from 'utils/api'
-import { utils } from 'web3'
 
 const { bufferToHex0x } = Mantle.utils
 
@@ -15,14 +12,15 @@ export const fetchNotes = () => {
   return async (dispatch, getState) => {
     const { auth: { publicKey, mnemonic } } = getState()
     const { data: { notes: fetchedNotes, count } } = await api.get('/notes')
+
     const mantle = new Mantle()
     mantle.loadMnemonic(mnemonic)
 
-    // const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
     const notes = []
     for (let i = 0; i < count; i++) {
       const { tag, encrypted, author, encryptedKeys, sharedWith } = fetchedNotes[i]
       const note = { tag, encrypted, author, encryptedKeys, sharedWith }
+
       const viewable = sharedWith.includes(publicKey)
       const index = sharedWith.indexOf(publicKey)
       const key = viewable ? Mantle.decrypt(encryptedKeys[index], mantle.privateKey) : null

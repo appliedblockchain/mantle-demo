@@ -3,44 +3,36 @@ const Koa = require('koa')
 const cors = require('@koa/cors')
 const compress = require('koa-compress')
 const respond = require('koa-respond')
-// const docs = require('@appliedblockchain/koa-docs')
 const { middleware } = require('./router')
+const rootMiddleware = require('./routes/root')
 const logger = require('./logger')
-const {
-  notFoundHandler
-  // errorHandler
-  // assignToContext
-} = require('./middleware')
-// const setupWeb3 = require('./setupWeb3')
-// const checkContractDeployment = require('./checkContractDeployment')
-// const { healthcheck } = require('./healthcheck')
-
-// const contracts = require('contracts')
+const { notFoundHandler } = require('./middleware')
 const { web3, contracts, testDeployment } = require('src/utils/web3')
-// const abi = contract.abi
 
 const createServer = async () => {
   logger.debug('Creating server...')
 
-  // await testDeployment()
-  // Configure contracts
+  await testDeployment()
+
+  /**
+   * Configure contracts
+   * @TODO:
+   * Configure contracts in the src/utils/web3 file. This approach of configuring them on server start-up
+   * instead of on web3 instantiation is difficult to reason about
+   */
   const [ from ] = await web3.eth.getAccounts()
   const params = { from, gas: 50000000 }
   contracts.Notes.options = { ...contracts.Notes.options, ...params }
   contracts.Users.options = { ...contracts.Users.options, ...params }
-  // const { contracts, web3 } = await setupWeb3({ abi, contractAddress })
-  // await checkContractDeployment(web3, contractAddress, contract.contractName)
 
 
   const app = new Koa()
 
   app
-    // .use(assignToContext({ contracts, web3 }))
-    // .use(errorHandler)
-    // .use(healthcheck(contractAddress, web3))
     .use(compress())
     .use(respond())
     .use(cors())
+    .use(rootMiddleware)
     .use(middleware)
     .use(notFoundHandler)
 
@@ -51,7 +43,7 @@ const createServer = async () => {
   })
 
   server.on('error', async error => {
-    console.log('Error', error)
+    logger.debug('Error', error)
   })
 
   logger.debug('Server created.')

@@ -10,6 +10,7 @@ const Users = new web3.eth.Contract(contractsJSON.Users.abi, contractsJSON.Users
 
 const contracts = { Notes, Users }
 
+// @TODO: Dynamically check contract codes
 const testDeployment = async () => {
   const NotesCode = await web3.eth.getCode(contractsJSON.Notes.address)
   const UsersCode = await web3.eth.getCode(contractsJSON.Users.address)
