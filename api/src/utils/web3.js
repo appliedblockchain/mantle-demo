@@ -10,18 +10,17 @@ const Users = new web3.eth.Contract(contractsJSON.Users.abi, contractsJSON.Users
 
 const contracts = { Notes, Users }
 
-// @TODO: Dynamically check contract codes
-const testDeployment = async () => {
-  const NotesCode = await web3.eth.getCode(contractsJSON.Notes.address)
-  const UsersCode = await web3.eth.getCode(contractsJSON.Users.address)
-
-  if (NotesCode === '0x0' || NotesCode === '0x' || UsersCode === '0x0' || UsersCode === '0x') {
-    throw new Error('No code at the specified contract addresses')
-  }
+const checkDeployment = async () => {
+  Object.entries(contractsJSON).forEach(async ([ _, { address } ]) => {
+    const code = await web3.eth.getCode(address)
+    if (code === '0x0' || code === '0x') {
+      throw new Error(`No code at the specified contract address: ${address}`)
+    }
+  })
 }
 
 module.exports = {
   web3,
   contracts,
-  testDeployment
+  checkDeployment
 }

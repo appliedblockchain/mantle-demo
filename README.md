@@ -35,6 +35,6 @@ Available API routes:
 ```
 GET http://localhost:3000/api/users
 GET http://localhost:3000/api/notes
-POST http://localhost:3000/api/users
+POST http://localhost:3000/api/notes
 ```
 

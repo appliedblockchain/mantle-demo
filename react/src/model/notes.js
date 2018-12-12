@@ -37,6 +37,14 @@ export const fetchNotes = () => {
       }
 
       const viewable = sharedWith.includes(publicKey)
+      /**
+       * @NOTE: `encryptedKeys` and `sharedWith` act as parallel arrays, i.e. index i in `sharedWith` (the public key)
+       * corresponds to index i in `encryptedKeys` (the encrypted symmetric key for a user).
+       *
+       * @TODO: Look into better options. This seems like a possible pitfall (e.g. arrays cannot be modified without
+       * first considering the impact on the related array). Solidity does not seem to provide a standard way of storing
+       * key:value data but there should be a more reliable option
+       */
       const index = sharedWith.indexOf(publicKey)
       const key = viewable ? Mantle.decrypt(encryptedKeys[index], mantle.privateKey) : null
       const decrypted = viewable ? Mantle.decryptSymmetric(encrypted, key) : encrypted
