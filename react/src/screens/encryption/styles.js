@@ -1,3 +1,5 @@
+import { SIDE_MENU_WIDTH } from 'components/sideMenu'
+
 const styles = theme => {
   const { spacing: { unit } } = theme
 
@@ -9,7 +11,7 @@ const styles = theme => {
       color: '#9c2959'
     },
     container: {
-      marginLeft: '200px',
+      marginLeft: `${SIDE_MENU_WIDTH}px`,
       padding: `${unit * 4}px`
     },
     encrypted: {
