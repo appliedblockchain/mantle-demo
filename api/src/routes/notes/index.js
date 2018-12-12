@@ -9,29 +9,50 @@ const routes = [
     path: '/notes',
     output: {
       200: {
-        body: Joi.object()
+        body: Joi.array().items(Joi.object())
       }
     },
     handler: async ctx => {
       try {
-        console.log('NOTES**************', Notes.options.from)
         const count = await Notes.methods.getNoteCount().call()
-        console.log('COUNT', count)
-        const notes = []
-        // const note = await Notes.methods.getNote(0).call()
-        // console.log('NOTE*', note)
+        const promises = []
         for (let i = 0; i < count; i++) {
           const note = Notes.methods.getNote(i).call()
-          console.log('NOTE', note)
-          notes.push(note)
+          promises.push(note)
         }
-        console.log('****', notes)
-        const result = await Promise.all(notes)
-        console.log('RESULT*', result)
-        ctx.ok(result)
+
+        const notes = await Promise.all(promises)
+        ctx.ok({
+          count,
+          notes
+        })
       } catch (error) {
-        console.log('ERROR', error)
-        ctx.badRequest({ error: `${error}` })
+        ctx.throw(error)
+      }
+    }
+  },
+  {
+    method: 'post',
+    path: '/notes',
+    validate: {
+      type: 'json',
+      body: {
+        params: Joi.array().items(
+          Joi.string().required(),
+          Joi.string().required(),
+          Joi.string().required(),
+          Joi.array().items(Joi.string()).required(),
+          Joi.array().items(Joi.string()).required()
+        )
+      }
+    },
+    handler: async ctx => {
+      try {
+        const { params } = ctx.request.body
+        await Notes.methods.addNote(...params).send()
+        ctx.ok()
+      } catch (error) {
+        ctx.throw(error)
       }
     }
   }

@@ -25,8 +25,9 @@ const createServer = async () => {
   // await testDeployment()
   // Configure contracts
   const [ from ] = await web3.eth.getAccounts()
-  contracts.Notes.options.from = from
-  contracts.Users.options.from = from
+  const params = { from, gas: 50000000 }
+  contracts.Notes.options = { ...contracts.Notes.options, ...params }
+  contracts.Users.options = { ...contracts.Users.options, ...params }
   // const { contracts, web3 } = await setupWeb3({ abi, contractAddress })
   // await checkContractDeployment(web3, contractAddress, contract.contractName)
 

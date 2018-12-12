@@ -14,27 +14,19 @@ const FETCH_NOTES = '@app/fetchNotes'
 export const fetchNotes = () => {
   return async (dispatch, getState) => {
     const { auth: { publicKey, mnemonic } } = getState()
-    console.log('ENV', process.env)
-    try {
-      const result = await api.get('/notes')
-      console.log('RESULT*', result)
-    } catch (err) {
-
-    }
-
-    const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-
-    const contract = new web3.eth.Contract(Contracts.Notes.abi, Contracts.Notes.address)
-    const count = await contract.methods.getNoteCount().call()
-    const notes = []
+    const { data: { notes: fetchedNotes, count } } = await api.get('/notes')
     const mantle = new Mantle()
     mantle.loadMnemonic(mnemonic)
+
+    // const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+    const notes = []
     for (let i = 0; i < count; i++) {
-      const note = await contract.methods.getNote(i).call()
-      const viewable = note.sharedWith.includes(publicKey)
-      const index = note.sharedWith.indexOf(publicKey)
-      const key = viewable ? Mantle.decrypt(note.encryptedKeys[index], mantle.privateKey) : null
-      const decrypted = viewable ? Mantle.decryptSymmetric(note.encrypted, key) : note.encrypted
+      const { tag, encrypted, author, encryptedKeys, sharedWith } = fetchedNotes[i]
+      const note = { tag, encrypted, author, encryptedKeys, sharedWith }
+      const viewable = sharedWith.includes(publicKey)
+      const index = sharedWith.indexOf(publicKey)
+      const key = viewable ? Mantle.decrypt(encryptedKeys[index], mantle.privateKey) : null
+      const decrypted = viewable ? Mantle.decryptSymmetric(encrypted, key) : encrypted
 
       notes.push({ ...note, decrypted, viewable })
     }
@@ -49,38 +41,21 @@ export const fetchNotes = () => {
 export const createNote = ({ tag, msg, sharedWith = [] }) => {
   return async (dispatch, getState) => {
     try {
-      const { auth: { publicKey, address, mnemonic } } = getState()
-      const mantle = new Mantle()
-      mantle.loadMnemonic(mnemonic)
+      const { auth: { publicKey, address } } = getState()
+
       const symmetricKey = Mantle.createSymmetricKey()
       const encrypted = bufferToHex0x(
         Mantle.encryptSymmetric(msg, symmetricKey)
       )
-      console.log('pub', publicKey, publicKey.length)
-      // sharedWith.push(Buffer.from(publicKey.slice(2), 'hex'))
+
       sharedWith.push(publicKey)
-      console.log('**', sharedWith[0], sharedWith[0].length)
-      console.log('COMP', Buffer.from(publicKey.slice(2), 'hex'), utils.hexToBytes(publicKey))
-      const encryptedKeys = sharedWith.map(publicKey => bufferToHex0x(Mantle.encrypt(symmetricKey, publicKey)))
-      console.log('SHARED WITH', sharedWith)
-      console.log('ENCRUPTED KEYS', encryptedKeys)
+      const encryptedKeys = sharedWith.map(publicKey => bufferToHex0x(
+        Mantle.encrypt(symmetricKey, publicKey)
+      ))
 
-      const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-      const from = await web3.eth.getCoinbase()
-      const sendParams = { from, gas: 50000000 }
-      const contract = new web3.eth.Contract(Contracts.Notes.abi, Contracts.Notes.address)
-      await contract.methods.addNote(tag, encrypted, address, sharedWith, encryptedKeys).send(sendParams)
-      // mantle.loadContract({ address: Contracts.Notes.address, abi: Contracts.Notes.abi, name: 'Notes' })
-      // const rawTrx = await mantle.signTransaction({
-      //   params: [ tag, encrypted, address, sharedWith, encryptedKeys ],
-      //   contractName: 'Notes',
-      //   methodName: 'addNote'
-      // })
-
-      // console.log('RAW', rawTrx)
-
-      // const receipt = await web3.eth.sendSignedTransaction(rawTrx)
-      // console.log('RECEIPT*', receipt)
+      await api.post('/notes', {
+        params: [ tag, encrypted, address, sharedWith, encryptedKeys ]
+      })
 
       dispatch({
         type: CREATE_NOTE,
