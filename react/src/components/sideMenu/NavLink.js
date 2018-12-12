@@ -1,39 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import { withStyles } from '@material-ui/core/styles'
 import { withRouter, Link } from 'react-router-dom'
 import { compose } from 'recompose'
+import Tooltip from '@material-ui/core/Tooltip'
+import IconButton from '@material-ui/core/IconButton'
+import styles from './styles'
 
-const styles = theme => ({
-  default: { textAlign: 'center' },
-  selectedTxt: { color: theme.palette.primary.main, textAlign: 'center' }
-})
-
-const NavLink = ({ to, location, children, classes }) => {
-  const selected = location.pathname === to
+const NavLink = ({ to, location, classes, tooltip, icon: Icon }) => {
   const rootProps = {
     to,
-    divider: true,
-    button: true,
     component: Link
   }
 
   return (
-    <ListItem {...rootProps}>
-      <ListItemText
-        primary={children.toUpperCase()}
-        classes={{ primary: selected ? classes.selectedTxt : classes.default }}
-      />
-    </ListItem>
+    <Tooltip title={tooltip} placement="right" className={classes.container} {...rootProps}>
+      <IconButton>
+        <Icon className={location.pathname === to ? classes.selected : null} />
+      </IconButton>
+    </Tooltip>
   )
 }
 
 NavLink.propTypes = {
   to: PropTypes.string.isRequired,
-  location: PropTypes.object.isRequired,
-  children: PropTypes.string.isRequired
+  location: PropTypes.object.isRequired
 }
 
 export default compose(

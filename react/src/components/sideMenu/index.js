@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import NavList from './NavList'
 
-export const SIDE_MENU_WIDTH = 200
+export const SIDE_MENU_WIDTH = 48
 
 const drawerProps = {
   variant: 'permanent',
