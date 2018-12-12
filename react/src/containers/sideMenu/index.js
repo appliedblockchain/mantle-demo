@@ -4,14 +4,16 @@ import Navlink from 'components/sideMenu/NavLink'
 import {
   ENCRYPTION,
   VIEW_NOTES,
-  CREATE_NOTE } from 'routes'
+  CREATE_NOTE,
+  HOME } from 'routes'
 
 const SideMenuContainer = () => {
   return (
     <SideMenu>
-      <Navlink to={ENCRYPTION}>Encryption</Navlink>
       <Navlink to={VIEW_NOTES}>View notes</Navlink>
       <Navlink to={CREATE_NOTE}>Create note</Navlink>
+      <Navlink to={ENCRYPTION}>Encryption</Navlink>
+      <Navlink to={HOME}>Logout</Navlink>
     </SideMenu>
   )
 }

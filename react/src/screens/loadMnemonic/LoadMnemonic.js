@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Mantle from '@appliedblockchain/mantle-core'
-import { ENCRYPTION } from 'routes'
+import { VIEW_NOTES } from 'routes'
 import { withSnackbar } from 'notistack'
 import styles from './styles'
-import { compose } from 'redux';
+import { compose } from 'redux'
 
 class LoadMnemonic extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class LoadMnemonic extends Component {
 
   handleChange = key => event => {
     this.setState({
-      [key]: event.target.value,
+      [key]: event.target.value
     })
   }
 
@@ -34,9 +35,9 @@ class LoadMnemonic extends Component {
 
       const { history, loadMnemonic } = this.props
       loadMnemonic(mnemonic)
-      history.push(ENCRYPTION)
+      history.push(VIEW_NOTES)
     } catch (err) {
-      enqueueSnackbar('Failed to load mnemonic: please ensure you are entering a valid 12 word mnemonic', { variant: 'error' })  
+      enqueueSnackbar('Failed to load mnemonic: please ensure you are entering a valid 12 word mnemonic', { variant: 'error' })
     }
   }
 
@@ -45,28 +46,35 @@ class LoadMnemonic extends Component {
 
     return (
       <div className={classes.container}>
-      <Grid container direction='column' alignItems='center'>
-        <Grid item>
-        <TextField
-          label="Mnemonic"
-          variant='outlined'
-          value={this.state.mnemonic}
-          onChange={this.handleChange('mnemonic')}
-        />
-        </Grid>
-        <Grid item> 
-          <Button
-            className={classes.button}
-            color='primary'
-            variant='contained'
-            onClick={this.handleLoadMnemonic}>
+        <Grid container direction="column" alignItems="center">
+          <Grid item>
+            <TextField
+              label="Mnemonic"
+              variant="outlined"
+              value={this.state.mnemonic}
+              onChange={this.handleChange('mnemonic')}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              className={classes.button}
+              color="primary"
+              variant="contained"
+              onClick={this.handleLoadMnemonic}>
               Start demo
-          </Button>
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
     )
   }
+}
+
+LoadMnemonic.propTypes = {
+  classes: PropTypes.object.isRequired,
+  enqueueSnackbar: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  loadMnemonic: PropTypes.func.isRequired
 }
 
 export default compose(
