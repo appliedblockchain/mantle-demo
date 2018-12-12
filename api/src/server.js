@@ -6,7 +6,8 @@ const respond = require('koa-respond')
 const { middleware } = require('./router')
 const rootMiddleware = require('./routes/root')
 const logger = require('./logger')
-const { notFoundHandler } = require('./middleware')
+const { errorHandler, notFoundHandler } = require('./middleware')
+const { healthcheck } = require('./healthcheck')
 const { web3, contracts, testDeployment } = require('src/utils/web3')
 
 const createServer = async () => {
@@ -25,13 +26,19 @@ const createServer = async () => {
   contracts.Notes.options = { ...contracts.Notes.options, ...params }
   contracts.Users.options = { ...contracts.Users.options, ...params }
 
+  const contractAddresses = [
+    contracts.Notes.options.address,
+    contracts.Users.options.address
+  ]
 
   const app = new Koa()
 
   app
     .use(compress())
+    .use(errorHandler)
     .use(respond())
     .use(cors())
+    .use(healthcheck(contractAddresses, web3))
     .use(rootMiddleware)
     .use(middleware)
     .use(notFoundHandler)

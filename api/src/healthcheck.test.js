@@ -1,9 +1,12 @@
 const request = require('supertest')
-const setupAppForTest = require('../test/utils.js')
-const {
-  GIT_COMMIT_SHA_DEFAULT,
-  GIT_TAG_DEFAULT
-} = require('./healthcheck')
+const { setupAppForTest } = require('test/utils')
+const { GIT_COMMIT_SHA_DEFAULT, GIT_TAG_DEFAULT } = require('./healthcheck')
+const { contracts } = require('src/utils/web3')
+
+const contractAddresses = [
+  contracts.Notes.options.address,
+  contracts.Users.options.address
+]
 
 let app
 
@@ -19,13 +22,12 @@ describe(`GET ${URL}`, () => {
   })
 
   it('responds with the current contract address', async () => {
-    const { status, body } = await request(app)
+    const { body } = await request(app)
       .get(URL)
-      .expect('Content-Type', /json/)
+      .expect(200)
 
-    expect(status).toEqual(200)
     expect(body.parityStatus).toEqual('Running')
-    expect(body.storeContractAddress).toEqual(process.env.CONTRACT_ADDRESS)
+    expect(body.storeContractAddress).toEqual(contractAddresses)
     expect(body.commit).toEqual(GIT_COMMIT_SHA_DEFAULT)
     expect(body.tag).toEqual(GIT_TAG_DEFAULT)
     expect(body.latestBlockNumber).toBeGreaterThan(0)

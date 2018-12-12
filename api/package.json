@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "NODE_PATH=. nodemon ./run",
+    "test": "NODE_PATH=. jest",
     "lint": "eslint . --ignore-path .gitignore",
     "contract-compile": "npm run --prefix ../contracts compile",
     "contract-deploy": "npm run --prefix ../contracts deploy",

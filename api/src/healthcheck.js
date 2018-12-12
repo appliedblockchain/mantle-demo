@@ -21,12 +21,12 @@ const getLatestBlock = async (web3) => {
 }
 
 // GIT_COMMIT_SHA and GIT_TAG are populated when creating the docker image
-const healthcheck = (contractAddress, web3) => {
+const healthcheck = (contractAddresses, web3) => {
   return async (ctx, next) => {
     const { lastBlockNumber, status } = await getLatestBlock(web3)
     const healthCheckMethod = abHealthcheck({
       custom: {
-        storeContractAddress: contractAddress,
+        storeContractAddress: contractAddresses,
         latestBlockNumber: lastBlockNumber,
         parityStatus: status,
         commit: process.env.GIT_COMMIT_SHA || GIT_COMMIT_SHA_DEFAULT,
