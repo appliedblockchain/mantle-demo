@@ -9,7 +9,10 @@ const routes = [
     path: '/notes',
     output: {
       200: {
-        body: Joi.array().items(Joi.object())
+        body: {
+          count: Joi.number,
+          notes: Joi.array().items(Joi.object())
+        }
       }
     },
     handler: async ctx => {

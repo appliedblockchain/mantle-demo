@@ -17,9 +17,24 @@ export const fetchNotes = () => {
     mantle.loadMnemonic(mnemonic)
 
     const notes = []
+    // @TODO: Look into why the api result includes numeric keys and attempt to omit them
+    // from the response so that we can simply do `const note = fetchedNotes[i]`
     for (let i = 0; i < count; i++) {
-      const { tag, encrypted, author, encryptedKeys, sharedWith } = fetchedNotes[i]
-      const note = { tag, encrypted, author, encryptedKeys, sharedWith }
+      const {
+        tag,
+        encrypted,
+        author,
+        encryptedKeys,
+        sharedWith
+      } = fetchedNotes[i]
+
+      const note = {
+        tag,
+        encrypted,
+        author,
+        encryptedKeys,
+        sharedWith
+      }
 
       const viewable = sharedWith.includes(publicKey)
       const index = sharedWith.indexOf(publicKey)
@@ -52,19 +67,30 @@ export const createNote = ({ tag, msg, sharedWith = [] }) => {
       ))
 
       await api.post('/notes', {
-        params: [ tag, encrypted, address, sharedWith, encryptedKeys ]
+        params: [
+          tag,
+          encrypted,
+          address,
+          sharedWith,
+          encryptedKeys
+        ]
       })
 
       dispatch({
         type: CREATE_NOTE,
-        payload: { tag, encrypted, encryptedKeys, publicKey, address }
+        payload: {
+          tag,
+          encrypted,
+          encryptedKeys,
+          publicKey,
+          address
+        }
       })
     } catch (err) {
       console.log('ERR', err)
     }
   }
 }
-
 
 const INITIAL_STATE = []
 

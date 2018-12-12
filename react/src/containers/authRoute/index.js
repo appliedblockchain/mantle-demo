@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router-dom'
 
 const AuthRoute = ({ authenticated, ...props }) => (
   <>
-    { authenticated ? <Route {...props}  /> : <Redirect to="/" /> }
+    { authenticated ? <Route {...props} /> : <Redirect to="/" /> }
   </>
 )
 

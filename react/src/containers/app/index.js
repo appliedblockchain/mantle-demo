@@ -7,7 +7,14 @@ import LoadMnemonic from 'screens/loadMnemonic'
 import Encryption from 'screens/encryption'
 import ViewNotes from 'screens/viewNotes'
 import CreateNote from 'screens/createNote'
-import { HOME, MNEMONIC, ENCRYPTION, LOAD_MNEMONIC, CREATE_NOTE, VIEW_NOTES } from 'routes'
+import {
+  HOME,
+  MNEMONIC,
+  ENCRYPTION,
+  LOAD_MNEMONIC,
+  CREATE_NOTE,
+  VIEW_NOTES
+} from 'routes'
 import AuthRoute from 'containers/authRoute'
 
 const App = () => (

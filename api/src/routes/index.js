@@ -1,3 +1,4 @@
 module.exports = [
-  require('./notes')
+  require('./notes'),
+  require('./users')
 ]

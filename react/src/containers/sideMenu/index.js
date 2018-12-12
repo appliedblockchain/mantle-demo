@@ -5,7 +5,8 @@ import {
   ENCRYPTION,
   VIEW_NOTES,
   CREATE_NOTE,
-  HOME } from 'routes'
+  HOME
+} from 'routes'
 
 const SideMenuContainer = () => {
   return (
@@ -13,6 +14,7 @@ const SideMenuContainer = () => {
       <Navlink to={VIEW_NOTES}>View notes</Navlink>
       <Navlink to={CREATE_NOTE}>Create note</Navlink>
       <Navlink to={ENCRYPTION}>Encryption</Navlink>
+      {/* @TODO: Move logout button to bottom of nav bar */}
       <Navlink to={HOME}>Logout</Navlink>
     </SideMenu>
   )

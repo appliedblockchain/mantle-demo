@@ -1,5 +1,4 @@
-import Web3 from 'web3'
-import Contracts from 'details.js'
+import api from 'utils/api'
 
 /* ACTION */
 const FETCH_USERS = '@app/fetchUsers'
@@ -7,14 +6,14 @@ const FETCH_USERS = '@app/fetchUsers'
 /* ACTION CREATORS */
 export const fetchUsers = () => {
   return async dispatch => {
-    const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+    const { data: { count, users: fetchedUsers } } = await api.get('/users')
 
-    const contract = new web3.eth.Contract(Contracts.Users.abi, Contracts.Users.address)
-    const count = await contract.methods.getUserCount().call()
     const users = []
-
+    // @TODO: Look into why the api result includes numeric keys and attempt to omit them
+    // from the response so that we can simply do `const note = fetchedUsers[i]`
     for (let i = 0; i < count; i++) {
-      const user = await contract.methods.getUser(i).call()
+      const { name, pubKey, addr } = fetchedUsers[i]
+      const user = { name, pubKey, addr }
       users.push(user)
     }
 
