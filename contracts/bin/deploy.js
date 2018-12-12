@@ -64,7 +64,6 @@ files.forEach(file => {
       .addUser(user2.address, user2.getPublicKey('hex0x'), 'User 2')
       .send(sendParams)
 
-    // TODO: Change path to a reasonable location
     const path = join(__dirname, '../../api/contracts/index.js')
     fs.writeFileSync(path, contractsJSON)
     console.log(`Contract information saved at ${path}`)

@@ -2,42 +2,23 @@
   "name": "mantle-demo-api",
   "private": true,
   "version": "0.1.0",
-  "description": "A basic starter Node application",
+  "description": "Mantle demo (API)",
   "main": "run.js",
   "engines": {
     "node": ">=9.0.0"
   },
   "scripts": {
     "start": "NODE_PATH=. nodemon ./run",
-    "start:prod": "npm run run:prod",
-    "run:prod": "node run.js",
-    "test": "jest'",
-    "test:watch": "jest --watch",
-    "test:ci": "jest --ci --forceExit'",
     "lint": "eslint . --ignore-path .gitignore",
-    "parity": "docker run -p 8545:8545 appliedblockchain/parity-solo",
     "contract-compile": "npm run --prefix ../contracts compile",
-    "contract-deploy": "npm run --prefix ../contracts  deploy"
+    "contract-deploy": "npm run --prefix ../contracts deploy",
+    "parity": "docker run -p 8545:8545 appliedblockchain/parity-solo"
   },
   "eslintConfig": {
     "extends": "@appliedblockchain/eslint-config"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/appliedblockchain/base-node-app.git"
-  },
-  "keywords": [
-    "node"
-  ],
   "author": "Applied Blockchain",
   "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/appliedblockchain/base-node-app/issues"
-  },
-  "homepage": "https://github.com/appliedblockchain/base-node-app#readme",
-  "jest": {
-    "setupTestFrameworkScriptFile": "./test/jest-config.js"
-  },
   "devDependencies": {
     "@appliedblockchain/eslint-config": "^2.2.0",
     "eslint": "^4.19.1",
@@ -46,19 +27,14 @@
     "supertest": "^3.1.0"
   },
   "dependencies": {
-    "@appliedblockchain/consul": "^1.0.2",
-    "@appliedblockchain/contract-artefacts-deployer": "0.0.4",
     "@appliedblockchain/koa-docs": "^2.1.0",
     "@appliedblockchain/koa-healthcheck": "^1.2.0",
     "@appliedblockchain/mantle-api": "^1.1.0",
     "@appliedblockchain/mantle-core": "^1.11.0",
-    "@appliedblockchain/store-contract-artefacts": "^0.3.0",
     "@koa/cors": "^2.2.1",
-    "@sentry/node": "^4.3.4",
     "abi-decoder": "^1.2.0",
     "bunyan": "^1.8.12",
     "config": "^1.30.0",
-    "elasticsearch": "^15.2.0",
     "koa": "^2.5.1",
     "koa-compress": "^3.0.0",
     "koa-joi-router": "^5.1.0",

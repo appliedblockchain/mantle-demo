@@ -1,16 +1,16 @@
 {
-  "name": "mantle-example",
+  "name": "mantle-demo-react",
   "private": true,
-  "version": "1.0.0",
-  "description": "React component for ab-admin",
+  "version": "0.1.0",
+  "description": "Mantle demo (React)",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build"
   },
   "author": "Applied Blockchain",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "eslintConfig": {
-    "extends": "@appliedblockchain"
+    "extends": "@appliedblockchain/eslint-config"
   },
   "devDependencies": {
     "@appliedblockchain/eslint-config": "^2.4.0",

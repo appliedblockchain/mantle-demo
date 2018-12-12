@@ -1,15 +1,40 @@
 # mantle-demo
 
-### `react`
+A demo app highlighting how to use Mantle's encryption capabilities.
 
-Setup: `npm start` (Application will load on `http://localhost:3001`)
+# Setup
 
-Currently contains the following:
+TODO: Set up docker-compose for local development
 
-- Generate mnemonic feature (generate a random 12-word passphrase that is a human readable representation of a user account, i.e. a private/public key pair)
+To set up the demo locally, perform the following actions:
 
-- Load account details by supplying a previosuly generated mnemonic
+#### `From /api:`
 
-- Encryption route:
-  - A UI to encrypt a message (requires a public key) and decrypt an encrypted message (requires a corresponding private key). Key pairs are supplied for the loaded account for demonstration purposes
+- `npm i`
+
+#### `From /contracts:`
+
+- `npm i`
+- `npm run compile`
+- `npm run parity`
+- `npm run deploy` (Deploys contracts to your running parity node)
+
+#### `From /react:`
+
+- `npm i`
+
+#### `From project root(/):`
+
+- `npm i`
+- `npm start`
+
+The API server will start on port 3000 and react app on port 3001
+
+Available API routes:
+
+```
+GET http://localhost:3000/api/users
+GET http://localhost:3000/api/notes
+POST http://localhost:3000/api/users
+```
 
