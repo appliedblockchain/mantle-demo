@@ -17,8 +17,6 @@ const enhancers = compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : compose
 )
 
-console.log('ENHANCERS', enhancers)
-
 export const store = createStore(
   persistedReducer,
   enhancers

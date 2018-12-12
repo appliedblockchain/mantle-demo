@@ -48,20 +48,16 @@ class CreateNote extends Component {
 
   render() {
     const sharedWith = Array.from(this.state.sharedWith)
-    const { classes, users } = this.props 
-    console.log('USERS', this.props.users)
-    console.log('***', this.state)
+    const { classes, users, createNote, enqueueSnackbar } = this.props 
 
-    const onSubmit = async({ tag, msg, ...rest }, { resetForm }) => {
-      console.log('*****', rest)
+    const onSubmit = async({ tag, msg }, { resetForm }) => {
      try {
-       const { createNote, enqueueSnackbar } = this.props 
        const note = { tag, msg, sharedWith }
        await createNote(note)
-      //  enqueueSnackbar('Note successfully created', { variant: 'success' })
+       enqueueSnackbar('Note successfully created', { variant: 'success' })
        resetForm({})
      } catch (err) {
-      //  enqueueSnackbar('Note creation failed', { variant: 'error' })
+        enqueueSnackbar('Note creation failed', { variant: 'error' })
      }
    }
   
@@ -70,7 +66,7 @@ class CreateNote extends Component {
         <SideMenu />
         <Grid container justify='center' spacing={24}>
           <Grid item xs={10}>
-            <Typography variant='h2'>Create a note</Typography>
+            <Typography variant='h4'>Create a note</Typography>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paper}>

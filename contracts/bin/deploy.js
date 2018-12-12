@@ -56,18 +56,16 @@ files.forEach(file => {
     const user2 = new Mantle()
     user2.loadMnemonic('license dish memory enemy mammal alley garage edge supreme join rival tree')
 
-    const created = await Users.methods
+    await Users.methods
       .addUser(user1.address, user1.getPublicKey('hex0x'), 'User 1')
       .send(sendParams)
 
-    console.log('CREATED *', created)
     await Users.methods
       .addUser(user2.address, user2.getPublicKey('hex0x'), 'User 2')
       .send(sendParams)
 
     // TODO: Change path to a reasonable location
-    // const path = join(__dirname, '../details.js')
-    const path = join(__dirname, '../../react/src/details.js')
+    const path = join(__dirname, '../../api/contracts/index.js')
     fs.writeFileSync(path, contractsJSON)
     console.log(`Contract information saved at ${path}`)
   } catch (err) {

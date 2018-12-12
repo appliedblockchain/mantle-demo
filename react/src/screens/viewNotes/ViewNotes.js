@@ -37,7 +37,7 @@ class ViewNotes extends Component {
         <SideMenu />
         <Grid container justify='center' spacing={24}>
           <Grid item xs={10}>
-            <Typography variant='h2'>Notes</Typography>
+            <Typography variant='h4'>Notes</Typography>
           </Grid>
           { notes.length ? notes.map((note, idx) => (
             <Grid item xs={10} key={idx}>

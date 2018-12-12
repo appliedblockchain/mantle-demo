@@ -15,10 +15,8 @@ export const fetchUsers = () => {
 
     for (let i = 0; i < count; i++) {
       const user = await contract.methods.getUser(i).call()
-      console.log('USER', user)
       users.push(user)
     }
-    console.log('USERS*', users)
 
     dispatch({
       type: FETCH_USERS,

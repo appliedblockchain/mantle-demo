@@ -79,7 +79,7 @@ class Encryption extends Component {
         <SideMenu />
         <Grid container justify='center' spacing={24}>
           <Grid item xs={10}>
-            <Typography variant='h2'>Encryption</Typography>
+            <Typography variant='h4'>Asymmetric Encryption</Typography>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paper}>
