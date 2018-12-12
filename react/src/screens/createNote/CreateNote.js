@@ -16,6 +16,19 @@ import Button from '@material-ui/core/Button'
 import { Formik, Form } from 'formik'
 import Typography from '@material-ui/core/Typography'
 import * as Yup from 'yup'
+import Drawer from '@material-ui/core/Drawer'
+
+export const USER_MENU_WIDTH = 300
+
+const drawerProps = {
+  variant: 'permanent',
+  anchor: 'right',
+  PaperProps: {
+    style: {
+      width: USER_MENU_WIDTH
+    }
+  }
+}
 
 const CreateNoteSchema = Yup.object().shape({
   tag: Yup.string()
@@ -64,6 +77,35 @@ class CreateNote extends Component {
     return (
       <div className={classes.container}>
         <SideMenu />
+        <Drawer {...drawerProps}>
+          <div className={classes.usersContainer}>
+            { users.length ? (
+              <Grid container justify="center" spacing={24}>
+                { users.map((user, idx) => (
+                  <Grid item xs={12} key={idx}>
+                    <Paper className={classes.userPaper}>
+                      <Grid item xs={12} className={classes.userOptions}>
+                        <Typography variant="h5">
+                          {user.name}
+                          {this.state.sharedWith.has(user.pubKey) && <span className={classes.sharing}>&nbsp; (Sharing)</span>}
+                        </Typography>
+                        {/* @TODO: Replace onClick with bound function. Anonymous functions are bad for performance */}
+                        <IconButton onClick={() => this.toggleShare(user.pubKey)}>
+                          { this.state.sharedWith.has(user.pubKey)
+                            ? <RemoveCircle />
+                            : <AddCircle />
+                          }
+                        </IconButton>
+                      </Grid>
+                      <Text className={classes.marginBottom}>Address: {user.addr}</Text>
+                      <Text className={classes.marginBottom}>Public key: {user.pubKey}</Text>
+                    </Paper>
+                  </Grid>
+                )) }
+              </Grid>
+            ) : null }
+          </div>
+        </Drawer>
         <Grid container justify="center" spacing={24}>
           <Grid item xs={10}>
             <Typography variant="h4">Create a note</Typography>
@@ -93,35 +135,6 @@ class CreateNote extends Component {
                           variant="outlined"
                         />
                       </Grid>
-
-                      { users.length ? (
-                        <>
-                          <Grid item xs={12}>
-                            <Typography variant="h6">Share your note with the following users?</Typography>
-                          </Grid>
-                          { users.map((user, idx) => (
-                            <Grid item xs={12} key={idx}>
-                              <Paper className={classes.userPaper}>
-                                <Typography variant="h5" className={classes.marginBottom}>
-                                  {user.name}
-                                  {this.state.sharedWith.has(user.pubKey) && <span className={classes.sharing}>&nbsp; (Sharing)</span>}
-                                </Typography>
-                                <Text className={classes.marginBottom}>Address: {user.addr}</Text>
-                                <Text className={classes.marginBottom}>Public key: {user.pubKey}</Text>
-                                {/* @TODO: Replace onClick with bound function. Anonymous functions are bad for performance */}
-                                <div className={classes.alignRight}>
-                                  <IconButton onClick={() => this.toggleShare(user.pubKey)}>
-                                    { this.state.sharedWith.has(user.pubKey)
-                                      ? <RemoveCircle />
-                                      : <AddCircle />
-                                    }
-                                  </IconButton>
-                                </div>
-                              </Paper>
-                            </Grid>
-                          )) }
-                        </>
-                      ) : null }
 
                       <Grid item xs={12} className={classes.alignRight}>
                         <Button type="submit" color="primary" variant="contained" disabled={!props.isValid}>
