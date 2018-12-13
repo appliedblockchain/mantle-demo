@@ -1,0 +1,7 @@
+*node_modules
+
+/api/contracts/*
+!/api/contracts/.gitkeep
+
+/contracts/build/contracts/*
+!/contracts/build/contracts/.gitkeep
