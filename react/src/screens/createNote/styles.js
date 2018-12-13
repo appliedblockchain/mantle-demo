@@ -2,7 +2,6 @@ import { SIDE_MENU_WIDTH } from 'components/sideMenu'
 import { USER_MENU_WIDTH } from './CreateNote'
 
 const styles = theme => {
-  console.log('THEME', theme)
   const { spacing: { unit } } = theme
 
   return {

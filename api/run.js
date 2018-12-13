@@ -13,8 +13,7 @@ const { Notes, Users } = require('contracts')
       throw new Error('You must start the server with a valid "Notes" and "Users" contract deployed')
     }
 
-    const addresses = [ Notes.address, Users.address ]
-    await runApp(addresses)
+    await runApp()
 
     logger.debug(`Server listening on ${PORT} in '${NODE_ENV}' mode`)
     logger.debug(`Contract deployed at ${Notes.address}`)
