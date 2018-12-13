@@ -1,10 +1,15 @@
 # mantle-demo
 
-A demo app highlighting how to use Mantle's encryption capabilities.
+What is mantle-demo?
 
-# Setup
+An example app highlighting how to use Mantle's asymmetric and symmetric encryption/decryption capabilities, mnemonic/account generation and management, and more.
 
-TODO: Set up docker-compose for local development
+## Features
+- React frontend responsible for encrypting data, generating user accounts and communicating with API
+- API component responsible for communicating with our blockchain via web3 and storing contract information
+- Contract component reponsible for compilation and deployment of "Notes" and "Users" contracts
+
+## Setup
 
 To set up the demo locally, perform the following actions:
 
@@ -38,3 +43,6 @@ GET http://localhost:3000/api/notes
 POST http://localhost:3000/api/notes
 ```
 
+## TODO
+
+- Set up docker-compose for local development
