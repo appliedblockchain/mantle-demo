@@ -16,6 +16,7 @@ export const createUser = mnemonic => {
         addr: mantle.address,
         pubKey: mantle.getPublicKey('hex0x')
       }
+
       const { addr, pubKey } = user
       const { data } = await api.post('/users', {
         params: [
@@ -29,23 +30,14 @@ export const createUser = mnemonic => {
         payload: data
       })
     } catch (err) {
-      console.log('ERR', err)
+      throw err
     }
   }
 }
 
 export const fetchUsers = () => {
   return async dispatch => {
-    const { data: { count, users: fetchedUsers } } = await api.get('/users')
-
-    const users = []
-    // @TODO: Look into why the api result includes numeric keys and attempt to omit them
-    // from the response so that we can simply do `const note = fetchedUsers[i]`
-    for (let i = 0; i < count; i++) {
-      const { name, pubKey, addr } = fetchedUsers[i]
-      const user = { name, pubKey, addr }
-      users.push(user)
-    }
+    const { data: users } = await api.get('/users')
 
     dispatch({
       type: FETCH_USERS,
