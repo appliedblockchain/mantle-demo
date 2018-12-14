@@ -51,12 +51,14 @@ class CreateNote extends Component {
   }
 
   toggleShare(address) {
-    const sharedWith = { ...this.state.sharedWith }
-    sharedWith.has(address)
-      ? sharedWith.delete(address)
-      : sharedWith.add(address)
+    const { sharedWith } = this.state
+    const newSharedWith = new Set(sharedWith)
 
-    this.setState({ sharedWith })
+    sharedWith.has(address)
+      ? newSharedWith.delete(address)
+      : newSharedWith.add(address)
+
+    this.setState({ sharedWith: newSharedWith })
   }
 
   render() {
