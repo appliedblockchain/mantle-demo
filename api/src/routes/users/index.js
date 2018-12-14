@@ -33,6 +33,33 @@ const routes = [
         ctx.throw(error)
       }
     }
+  },
+  {
+    method: 'post',
+    path: '/users',
+    validate: {
+      type: 'json',
+      body: {
+        params: Joi.array().items(
+          Joi.string().required(),
+          Joi.string().required()
+        )
+      }
+    },
+    handler: async ctx => {
+      try {
+        const { params } = ctx.request.body
+        const userId = Number(await Users.methods.getUserCount().call()) + 1
+        console.log('USER ID', userId)
+        const username = `User ${userId}`
+        console.log('PARAMS', params)
+        console.log('**', ...params, username)
+        await Users.methods.addUser(...params, username).send()
+        ctx.ok()
+      } catch (error) {
+        ctx.throw(error)
+      }
+    }
   }
 ]
 
