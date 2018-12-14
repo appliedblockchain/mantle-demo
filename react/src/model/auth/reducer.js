@@ -1,22 +1,7 @@
 import Mantle from '@appliedblockchain/mantle-core'
-import { createUser } from './users'
 
-/* ACTION */
-const LOAD_MNEMONIC = '@app/loadMnemonic'
-
-/* ACTION CREATORS */
-export const loadMnemonic = (mnemonic, newUser) => {
-  return async dispatch => {
-    dispatch({
-      type: LOAD_MNEMONIC,
-      payload: mnemonic
-    })
-
-    if (newUser) {
-      dispatch(createUser(mnemonic))
-    }
-  }
-}
+/* ACTION NAMES */
+export const LOAD_MNEMONIC = '@app/loadMnemonic'
 
 const INITIAL_STATE = {
   mnemonic: '',
@@ -24,7 +9,6 @@ const INITIAL_STATE = {
   address: ''
 }
 
-/* UPDATE */
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOAD_MNEMONIC: {

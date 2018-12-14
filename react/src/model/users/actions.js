@@ -1,9 +1,6 @@
 import Mantle from '@appliedblockchain/mantle-core'
 import api from 'utils/api'
-
-/* ACTION */
-const CREATE_USER = '@app/createUser'
-const FETCH_USERS = '@app/fetchUsers'
+import { CREATE_USER, FETCH_USERS } from './reducer'
 
 /* ACTION CREATORS */
 export const createUser = mnemonic => {
@@ -45,19 +42,3 @@ export const fetchUsers = () => {
     })
   }
 }
-
-const INITIAL_STATE = []
-
-/* UPDATE */
-const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case FETCH_USERS:
-      return action.payload
-    case CREATE_USER:
-      return [ ...state, action.payload ]
-    default:
-      return state
-  }
-}
-
-export default reducer
