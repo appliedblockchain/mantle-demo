@@ -8,7 +8,7 @@ services:
       args:
         - NPM_TOKEN
     environment:
-      NODE_ENV: development
+      NODE_ENV: staging
     ports:
       - 3001:3001
   api:
@@ -22,7 +22,7 @@ services:
       - ./api/config/:/home/node/api/config
       - ./api/contracts/:/home/node/api/contracts
     environment:
-      NODE_ENV: development
+      NODE_ENV: staging
       NODE_PATH: .
     networks:
       - main
