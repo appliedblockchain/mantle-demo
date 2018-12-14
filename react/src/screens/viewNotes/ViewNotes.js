@@ -34,7 +34,7 @@ class ViewNotes extends Component {
             <Typography variant="h4">Notes</Typography>
           </Grid>
           { notes.length ? notes.map((note, idx) => (
-            <Grid item xs={10} key={idx}>
+            <Grid item xs={10} key={idx} className={note.viewable ? null : classes.restricted}>
               <Paper className={classes.paper}>
                 <Text>Tag: {note.tag}</Text>
                 { note.viewable

@@ -14,6 +14,9 @@ const styles = theme => {
     },
     alignRight: {
       textAlign: 'right'
+    },
+    restricted: {
+      opacity: 0.5
     }
   }
 }
