@@ -1,3 +1,4 @@
+import Mantle from '@appliedblockchain/mantle-core'
 import api from 'utils/api'
 
 /* ACTION */
@@ -5,12 +6,16 @@ const CREATE_USER = '@app/createUser'
 const FETCH_USERS = '@app/fetchUsers'
 
 /* ACTION CREATORS */
-export const createUser = (user) => {
-  console.log('****', user)
+export const createUser = mnemonic => {
   return async dispatch => {
     try {
-      console.log('TRYING')
-      console.log('*** user', user)
+      const mantle = new Mantle()
+      mantle.loadMnemonic(mnemonic)
+
+      const user = {
+        addr: mantle.address,
+        pubKey: mantle.getPublicKey('hex0x')
+      }
       const { addr, pubKey } = user
       const { data } = await api.post('/users', {
         params: [
@@ -18,8 +23,6 @@ export const createUser = (user) => {
           pubKey
         ]
       })
-
-      console.log('DATA', data)
 
       dispatch({
         type: CREATE_USER,

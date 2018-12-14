@@ -5,34 +5,15 @@ import { createUser } from './users'
 const LOAD_MNEMONIC = '@app/loadMnemonic'
 
 /* ACTION CREATORS */
-// export const loadMnemonic = mnemonic => ({
-//   type: LOAD_MNEMONIC,
-//   payload: mnemonic
-// })
-
 export const loadMnemonic = (mnemonic, newUser) => {
   return async dispatch => {
-    console.log('****', mnemonic, newUser)
     dispatch({
       type: LOAD_MNEMONIC,
       payload: mnemonic
     })
 
     if (newUser) {
-      const mantle = new Mantle()
-      mantle.loadMnemonic(mnemonic)
-
-      const user = {
-        addr: mantle.address,
-        pubKey: mantle.getPublicKey('hex0x')
-      }
-
-      dispatch(createUser(user))
-
-      // dispatch({
-      //   type: CREATE_USER,
-      //   payload: user
-      // })
+      dispatch(createUser(mnemonic))
     }
   }
 }
