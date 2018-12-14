@@ -11,12 +11,17 @@ const Users = new web3.eth.Contract(contractsJSON.Users.abi, contractsJSON.Users
 const contracts = { Notes, Users }
 
 const checkDeployment = async () => {
+  const errors = []
   Object.entries(contractsJSON).forEach(async ([ _, { address } ]) => {
     const code = await web3.eth.getCode(address)
     if (code === '0x0' || code === '0x') {
-      throw new Error(`No code at the specified contract address: ${address}`)
+      errors.push(new Error(`No code at the specified contract address: ${address}`))
     }
   })
+
+  if (errors.length) {
+    throw errors
+  }
 }
 
 module.exports = {
