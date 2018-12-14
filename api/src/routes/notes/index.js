@@ -1,6 +1,7 @@
 const koaRouter = require('koa-joi-router')
 const Joi = koaRouter.Joi
 const router = koaRouter()
+const ignoreNumberedKeys = require('src/utils/ignoreNumberedKeys')
 const { contracts: { Notes } } = require('src/utils/web3')
 
 const routes = [
@@ -9,10 +10,7 @@ const routes = [
     path: '/notes',
     output: {
       200: {
-        body: {
-          count: Joi.number,
-          notes: Joi.array().items(Joi.object())
-        }
+        body: Joi.array().items(Joi.object())
       }
     },
     handler: async ctx => {
@@ -24,11 +22,8 @@ const routes = [
           promises.push(note)
         }
 
-        const notes = await Promise.all(promises)
-        ctx.ok({
-          count,
-          notes
-        })
+        const notes = (await Promise.all(promises)).map(ignoreNumberedKeys)
+        ctx.ok(notes.reverse())
       } catch (error) {
         ctx.throw(error)
       }

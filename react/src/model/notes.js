@@ -11,31 +11,13 @@ const FETCH_NOTES = '@app/fetchNotes'
 export const fetchNotes = () => {
   return async (dispatch, getState) => {
     const { auth: { publicKey, mnemonic } } = getState()
-    const { data: { notes: fetchedNotes, count } } = await api.get('/notes')
+    const { data } = await api.get('/notes')
 
     const mantle = new Mantle()
     mantle.loadMnemonic(mnemonic)
 
-    const notes = []
-    // @TODO: Look into why the api result includes numeric keys and attempt to omit them
-    // from the response so that we can simply do `const note = fetchedNotes[i]`
-    for (let i = 0; i < count; i++) {
-      const {
-        tag,
-        encrypted,
-        author,
-        encryptedKeys,
-        sharedWith
-      } = fetchedNotes[i]
-
-      const note = {
-        tag,
-        encrypted,
-        author,
-        encryptedKeys,
-        sharedWith
-      }
-
+    const notes = data.map(note => {
+      const { sharedWith, encryptedKeys, encrypted } = note
       const viewable = sharedWith.includes(publicKey)
       /**
        * @NOTE: `encryptedKeys` and `sharedWith` act as parallel arrays, i.e. index i in `sharedWith` (the public key)
@@ -49,8 +31,8 @@ export const fetchNotes = () => {
       const key = viewable ? Mantle.decrypt(encryptedKeys[index], mantle.privateKey) : null
       const decrypted = viewable ? Mantle.decryptSymmetric(encrypted, key) : encrypted
 
-      notes.push({ ...note, decrypted, viewable })
-    }
+      return { ...note, decrypted, viewable }
+    })
 
     dispatch({
       type: FETCH_NOTES,
