@@ -8,10 +8,10 @@ import Mantle from '@appliedblockchain/mantle-core'
 import { MNEMONIC, LOAD_MNEMONIC } from 'routes'
 
 const Home = props => {
-  const handleLoadMnemonic = () => {
+  const handleLoadMnemonic = async () => {
     const { history, loadMnemonic } = props
     const mnemonic = Mantle.generateMnemonic()
-    loadMnemonic(mnemonic)
+    await loadMnemonic(mnemonic, true)
     history.push(MNEMONIC)
   }
 

@@ -11,24 +11,6 @@ An example app highlighting how to use Mantle's asymmetric and symmetric encrypt
 
 ## Setup
 
-#### `docker-compose`
-
-To deploy the app to docker locally:
-
-#### From project root(/):
-
-> `docker-compose build` \
-> `docker-compose up`
-
-The application will start up but your contracts will not be deployed to your parity instance, so HTTP requests will fail until you deploy the contracts.
-
-#### From /contracts:
-
-> `npm run compile` \
-> `npm run deploy`
-
-Unlike local development, data should persist while the parity volume (defined in `docker-compose.yml`) still exists.
-
 #### `Local`
 
 To set up the demo locally, perform the following actions:

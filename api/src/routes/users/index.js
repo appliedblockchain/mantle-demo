@@ -1,6 +1,7 @@
 const koaRouter = require('koa-joi-router')
 const Joi = koaRouter.Joi
 const router = koaRouter()
+const ignoreNumberedKeys = require('src/utils/ignoreNumberedKeys')
 const { contracts: { Users } } = require('src/utils/web3')
 
 const routes = [
@@ -9,10 +10,7 @@ const routes = [
     path: '/users',
     output: {
       200: {
-        body: {
-          count: Joi.number,
-          notes: Joi.array().items(Joi.object())
-        }
+        body: Joi.array().items(Joi.object())
       }
     },
     handler: async ctx => {
@@ -24,11 +22,32 @@ const routes = [
           promises.push(user)
         }
 
-        const users = await Promise.all(promises)
-        ctx.ok({
-          count,
-          users
-        })
+        const users = (await Promise.all(promises)).map(ignoreNumberedKeys)
+        ctx.ok(users)
+      } catch (error) {
+        ctx.throw(error)
+      }
+    }
+  },
+  {
+    method: 'post',
+    path: '/users',
+    validate: {
+      type: 'json',
+      body: {
+        params: Joi.array().items(
+          Joi.string().required(),
+          Joi.string().required()
+        )
+      }
+    },
+    handler: async ctx => {
+      try {
+        const { params } = ctx.request.body
+        const userId = Number(await Users.methods.getUserCount().call()) + 1
+        const username = `User ${userId}`
+        await Users.methods.addUser(...params, username).send()
+        ctx.ok()
       } catch (error) {
         ctx.throw(error)
       }

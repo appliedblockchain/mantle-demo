@@ -1,11 +1,8 @@
 import Mantle from '@appliedblockchain/mantle-core'
 import api from 'utils/api'
+import { CREATE_NOTE, FETCH_NOTES } from './reducer'
 
 const { bufferToHex0x } = Mantle.utils
-
-/* ACTION */
-const CREATE_NOTE = '@app/createNote'
-const FETCH_NOTES = '@app/fetchNotes'
 
 /* ACTION CREATORS */
 export const fetchNotes = () => {
@@ -81,19 +78,3 @@ export const createNote = ({ tag, msg, sharedWith = [] }) => {
     }
   }
 }
-
-const INITIAL_STATE = []
-
-/* UPDATE */
-const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case CREATE_NOTE:
-      return [ ...state, action.payload ]
-    case FETCH_NOTES:
-      return action.payload
-    default:
-      return state
-  }
-}
-
-export default reducer
