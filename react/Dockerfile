@@ -8,7 +8,7 @@ USER node
 RUN mkdir /home/node/react
 WORKDIR /home/node/react
 
-COPY package.json package.json
+COPY package* /home/node/react/
 
 ARG NPM_TOKEN
 
