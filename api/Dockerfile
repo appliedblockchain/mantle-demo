@@ -10,7 +10,7 @@ USER node
 RUN mkdir /home/node/api
 WORKDIR /home/node/api
 
-COPY package.json package.json
+COPY package* /home/node/api/
 
 ARG NPM_TOKEN
 
@@ -20,6 +20,6 @@ RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc && \
 
 COPY . /home/node/api
 
-EXPOSE 3000 
+EXPOSE 3000
 
 CMD nodemon run.js
