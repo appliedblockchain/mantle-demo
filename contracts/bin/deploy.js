@@ -3,8 +3,9 @@ const { join } = require('path')
 const Web3 = require('web3')
 const config = require('config')
 const Mantle = require('@appliedblockchain/mantle-core')
-const PROVIDER = config.get('provider')
-const FROM = config.get('from')
+const ETHEREUM_JSONRPC_ENDPOINT = process.env.ETHEREUM_JSONRPC_ENDPOINT || 'http://localhost:8545'
+const FROM = process.env.FROM || ''
+const debug = require('debug')('contracts:deploy')
 
 const directory = join(__dirname, '../build/contracts')
 const files = fs
@@ -27,9 +28,11 @@ files.forEach(file => {
 
 ;(async () => {
   try {
-    const web3 = new Web3(new Web3.providers.HttpProvider(PROVIDER))
+    const web3 = new Web3(new Web3.providers.HttpProvider(ETHEREUM_JSONRPC_ENDPOINT))
     const coinbase = await web3.eth.getCoinbase()
     const from = FROM || coinbase
+    debug('from', from)
+
     const sendParams = { from, gas: 50000000 }
 
     const deployContract = async (contracts, contractName) => {
@@ -38,8 +41,11 @@ files.forEach(file => {
       return contract.deploy({ arguments: [] }).send(sendParams)
     }
 
+    debug('Will deploy contracts...')
     const Notes = await deployContract(contracts, 'Notes')
+    debug('Notes contract deployed.')
     const Users = await deployContract(contracts, 'Users')
+    debug('Users contract deployed.')
 
     const contractsJSON = `module.exports = ${
       JSON.stringify({
