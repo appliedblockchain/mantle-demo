@@ -19,7 +19,7 @@ frameworkVersion: ">=1.38.0 <2.0.0"
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: provided
   stage: dev
   region: eu-west-1
 
@@ -61,68 +61,105 @@ provider:
 #    - exclude-me-dir/**
 
 package:
-  individually: true
+  # individually: true
   exclude:
     - node_modules/web3/**
+    - node_modules/scrypt/**
+    - node_modules/tweetnacl/**
+    - node_modules/json-schema/**
+    - node_modules/web3-eth-iban/**
+    - node_modules/request/**
+    - node_modules/scrypt-js/**
+    - node_modules/tar/**
+    - node_modules/web3-utils/**
+    - node_modules/express/**
+    - node_modules/idna-uts46-hx/**
+    - node_modules/sshpk/**
+    - node_modules/web3-eth-accounts/**
+    - node_modules/fs-extra/**
+    - node_modules/eth-ens-namehash/**
+    - node_modules/iconv-lite/**
+    - node_modules/es-abstract/**
+    - node_modules/web3-providers-ws/**
+    - node_modules/nan/**
+    - node_modules/psl/**
+    - node_modules/tar.gz/**
+    - node_modules/number-to-bn/**
+    - node_modules/uri-js/**
+    - node_modules/ethjs-unit/**
+    - node_modules/bluebird/**
+    - node_modules/@types/**
 
 # layers:
 #   web3:
 #     path: web3-install-layer
 #     description: Web3 module installed
 
+# web3 layer is coming from ../web3-install-layer
+# nodejs10 layer is coming from https://github.com/lambci/node-custom-lambda
+
+requires-web3: &requires-web3
+  # runtime: provided
+  layers:
+    - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:3
+    - arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6
+
+requires-node10: &requires-node10
+  # runtime: provided
+  layers:
+    - arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6
+
 functions:
   usersCreate:
+    <<: *requires-web3
     handler: src/sls-handlers/users.create
-    layers:
-      - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:1
     events:
       - http:
           method: post
           path: users
           # cors: true
   usersList:
+    <<: *requires-web3
     handler: src/sls-handlers/users.list
-    layers:
-      - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:1
     events:
       - http:
           method: get
           path: users
           # cors: true
   notesCreate:
+    <<: *requires-web3
     handler: src/sls-handlers/notes.create
-    layers:
-      - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:1
     events:
       - http:
           method: post
           path: notes
           cors: true
   notesList:
+    <<: *requires-web3
     handler: src/sls-handlers/notes.list
-    layers:
-      - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:1
     events:
       - http:
           method: get
           path: notes
           cors: true
   healthHello:
+    <<: *requires-node10
     handler: src/sls-handlers/health/hello.reply
     events:
       - http: get health
   healthNodejs:
+    <<: *requires-node10
     handler: src/sls-handlers/health/nodejs.getInfo
     events:
       - http: get health/nodejs
   healthEthApi:
+    <<: *requires-node10
     handler: src/sls-handlers/health/eth/api.getInfo
     events:
       - http: get health/eth
   healthEthBlocks:
+    <<: *requires-web3
     handler: src/sls-handlers/health/eth/blocks.getInfo
-    layers:
-      - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:1
     events:
       - http: get health/eth/blocks
 
@@ -171,5 +208,10 @@ functions:
 #       Description: "Description for the output"
 #       Value: "Some output value"
 
-plugins:
+plugins: # Order matters!
+  - serverless-local-runtime
   - serverless-offline
+
+custom:
+  serverless-local-runtime:
+    local-runtime: nodejs
