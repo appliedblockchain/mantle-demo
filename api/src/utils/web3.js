@@ -1,8 +1,8 @@
 const Web3 = require('web3')
 const config = require('config')
-const ETHEREUM_JSONRPC_ENDPOINT = config.get('ETHEREUM_JSONRPC_ENDPOINT')
+const ETHEREUM_JSONRPC_ENDPOINT = process.env.ETHEREUM_JSONRPC_ENDPOINT || 'http://localhost:8545'
 
-const contractsJSON = require('contracts')
+const contractsJSON = require('../../contracts')
 
 const web3 = new Web3(ETHEREUM_JSONRPC_ENDPOINT)
 const Notes = new web3.eth.Contract(contractsJSON.Notes.abi, contractsJSON.Notes.address)
@@ -24,8 +24,24 @@ const checkDeployment = async () => {
   }
 }
 
+const setupContracts = async (_contracts) => {
+  await checkDeployment()
+
+  const [ from ] = await web3.eth.getAccounts()
+  const contractAddresses = []
+
+  Object.keys(_contracts).forEach(key => {
+    const contract = _contracts[key]
+    contract.options = { ...contract.options, from, gas: 50000000 }
+    contractAddresses.push(contract.options.address)
+  })
+
+  return contractAddresses
+}
+
 module.exports = {
   web3,
   contracts,
-  checkDeployment
+  checkDeployment,
+  setupContracts
 }
