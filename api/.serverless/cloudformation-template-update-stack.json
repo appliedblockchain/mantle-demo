@@ -13,6 +13,9 @@
               }
             }
           ]
+        },
+        "AccelerateConfiguration": {
+          "AccelerationStatus": "Enabled"
         }
       }
     },
@@ -187,7 +190,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-usersCreate",
         "Handler": "src/sls-handlers/users.create",
@@ -206,8 +209,8 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:3",
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:8",
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -215,14 +218,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "UsersCreateLambdaVersionZFv0rAZHyrMh3zlbbMHHGdZ9XFZOuEKVw7LAU4p1xlE": {
+    "UsersCreateLambdaVersion3mW9Sn2aRf54mDzrzADJBHlCEUgiTNkRz57bbifNsSo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UsersCreateLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "UsersListLambdaFunction": {
@@ -232,7 +235,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-usersList",
         "Handler": "src/sls-handlers/users.list",
@@ -251,8 +254,8 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:3",
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:8",
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -260,14 +263,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "UsersListLambdaVersionyYLkHAdLBlq7fXQsMc8E6JUwuhjPqnVZ85Oqx9szYQ": {
+    "UsersListLambdaVersionPzND2d2QlAGq8FIcZBRFVkS5xJtUAy8CRD5BbqKa3E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UsersListLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "NotesCreateLambdaFunction": {
@@ -277,7 +280,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-notesCreate",
         "Handler": "src/sls-handlers/notes.create",
@@ -296,8 +299,8 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:3",
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:8",
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -305,14 +308,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "NotesCreateLambdaVersionKGvVEwUNI0y4iwV2fb1dHp8pttYoP9DOkY6ZuwMSgw": {
+    "NotesCreateLambdaVersiontjdNeMK0mP6uxnxKHzp0HdGpZKZoVX9jN84oZnJU74": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "NotesCreateLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "NotesListLambdaFunction": {
@@ -322,7 +325,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-notesList",
         "Handler": "src/sls-handlers/notes.list",
@@ -341,8 +344,8 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:3",
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:8",
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -350,14 +353,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "NotesListLambdaVersion0dbCUtdi9ZZfrn2gESjuNzYDR39pCjuPoPifhXo0YY": {
+    "NotesListLambdaVersionwE1ZD6fJxelhs8CvAElAe0RmfNg99H10qyeq1t02aA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "NotesListLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "HealthHelloLambdaFunction": {
@@ -367,7 +370,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-healthHello",
         "Handler": "src/sls-handlers/health/hello.reply",
@@ -386,7 +389,7 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -394,14 +397,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HealthHelloLambdaVersion9ZhZp2qVPL8yGjaKJegvYPzvQlkMJ18arqBkTqxPbA": {
+    "HealthHelloLambdaVersionouiDe81zux8ctEWQbGp56psRNvDS7f4u88jCJ9Cw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HealthHelloLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "HealthNodejsLambdaFunction": {
@@ -411,7 +414,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-healthNodejs",
         "Handler": "src/sls-handlers/health/nodejs.getInfo",
@@ -430,7 +433,7 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -438,14 +441,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HealthNodejsLambdaVersionUGN3bzwWPkuTGGvUTSZ6bVIguivNvuGty1ieLQgWOM": {
+    "HealthNodejsLambdaVersionHyAGMv3mJbjvG2KjIEOA86uZGcKyI49tIWaIwOBOACQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HealthNodejsLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "HealthEthApiLambdaFunction": {
@@ -455,7 +458,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-healthEthApi",
         "Handler": "src/sls-handlers/health/eth/api.getInfo",
@@ -474,7 +477,7 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -482,14 +485,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HealthEthApiLambdaVersioniaaYbbwHo4oJ7l50Qt9NZhEtcFGqCNl85CmC8fLL8": {
+    "HealthEthApiLambdaVersionrJp28W9zfTLOsfwASPkJlJPhEBU5lo3DKzKFWavEE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HealthEthApiLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "HealthEthBlocksLambdaFunction": {
@@ -499,7 +502,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/mantle-demo/dev/1551288321019-2019-02-27T17:25:21.019Z/mantle-demo.zip"
+          "S3Key": "serverless/mantle-demo/dev/1551893761471-2019-03-06T17:36:01.471Z/mantle-demo.zip"
         },
         "FunctionName": "mantle-demo-dev-healthEthBlocks",
         "Handler": "src/sls-handlers/health/eth/blocks.getInfo",
@@ -518,8 +521,8 @@
           }
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:3",
-          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6"
+          "arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:8",
+          "arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7"
         ]
       },
       "DependsOn": [
@@ -527,14 +530,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HealthEthBlocksLambdaVersion3XBNyJGtWWTFkCMGakDffZEZOTJNk8Tk2z0HEG8UX8": {
+    "HealthEthBlocksLambdaVersionwbkgZ4e48FgVGK3rWylqUSWBMOS1iBGzZcnYTUHIE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HealthEthBlocksLambdaFunction"
         },
-        "CodeSha256": "PSGaSxqFDiHgHUBdPWNLgCCP/mT2KLutj+iR6x0UGvM="
+        "CodeSha256": "tS0u47SmhEQaWC+ESx0Hjqh+n0m5dqRWCSm0aDL7suk="
       }
     },
     "ApiGatewayRestApi": {
@@ -1020,7 +1023,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1551288322688": {
+    "ApiGatewayDeployment1551893763172": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1423,52 +1426,55 @@
         "Ref": "ServerlessDeploymentBucket"
       }
     },
+    "ServerlessDeploymentBucketAccelerated": {
+      "Value": true
+    },
     "UsersCreateLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UsersCreateLambdaVersionZFv0rAZHyrMh3zlbbMHHGdZ9XFZOuEKVw7LAU4p1xlE"
+        "Ref": "UsersCreateLambdaVersion3mW9Sn2aRf54mDzrzADJBHlCEUgiTNkRz57bbifNsSo"
       }
     },
     "UsersListLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UsersListLambdaVersionyYLkHAdLBlq7fXQsMc8E6JUwuhjPqnVZ85Oqx9szYQ"
+        "Ref": "UsersListLambdaVersionPzND2d2QlAGq8FIcZBRFVkS5xJtUAy8CRD5BbqKa3E"
       }
     },
     "NotesCreateLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "NotesCreateLambdaVersionKGvVEwUNI0y4iwV2fb1dHp8pttYoP9DOkY6ZuwMSgw"
+        "Ref": "NotesCreateLambdaVersiontjdNeMK0mP6uxnxKHzp0HdGpZKZoVX9jN84oZnJU74"
       }
     },
     "NotesListLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "NotesListLambdaVersion0dbCUtdi9ZZfrn2gESjuNzYDR39pCjuPoPifhXo0YY"
+        "Ref": "NotesListLambdaVersionwE1ZD6fJxelhs8CvAElAe0RmfNg99H10qyeq1t02aA"
       }
     },
     "HealthHelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HealthHelloLambdaVersion9ZhZp2qVPL8yGjaKJegvYPzvQlkMJ18arqBkTqxPbA"
+        "Ref": "HealthHelloLambdaVersionouiDe81zux8ctEWQbGp56psRNvDS7f4u88jCJ9Cw"
       }
     },
     "HealthNodejsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HealthNodejsLambdaVersionUGN3bzwWPkuTGGvUTSZ6bVIguivNvuGty1ieLQgWOM"
+        "Ref": "HealthNodejsLambdaVersionHyAGMv3mJbjvG2KjIEOA86uZGcKyI49tIWaIwOBOACQ"
       }
     },
     "HealthEthApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HealthEthApiLambdaVersioniaaYbbwHo4oJ7l50Qt9NZhEtcFGqCNl85CmC8fLL8"
+        "Ref": "HealthEthApiLambdaVersionrJp28W9zfTLOsfwASPkJlJPhEBU5lo3DKzKFWavEE"
       }
     },
     "HealthEthBlocksLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HealthEthBlocksLambdaVersion3XBNyJGtWWTFkCMGakDffZEZOTJNk8Tk2z0HEG8UX8"
+        "Ref": "HealthEthBlocksLambdaVersionwbkgZ4e48FgVGK3rWylqUSWBMOS1iBGzZcnYTUHIE"
       }
     },
     "ServiceEndpoint": {

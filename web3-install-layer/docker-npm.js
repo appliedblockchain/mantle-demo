@@ -14,7 +14,7 @@ Usage:
 
 const childProcess = require('child_process')
 
-const nodejsImage = 'node:10.15.1'
+const nodejsImage = 'aws-linux-node-builder:10.15.2'
 const innerWorkingDir = '/src'
 const dockerArgs = [
   'run', '-i',

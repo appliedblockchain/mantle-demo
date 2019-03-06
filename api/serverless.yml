@@ -101,13 +101,13 @@ package:
 requires-web3: &requires-web3
   # runtime: provided
   layers:
-    - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:3
-    - arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6
+    - arn:aws:lambda:eu-west-1:379937780633:layer:web3-1-0-0-beta-37:8
+    - arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7
 
 requires-node10: &requires-node10
   # runtime: provided
   layers:
-    - arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:6
+    - arn:aws:lambda:eu-west-1:553035198032:layer:nodejs10:7
 
 functions:
   usersCreate:
