@@ -1,5 +1,6 @@
 import Mantle from '@appliedblockchain/mantle-core'
 import api from 'utils/api'
+import appMantle from 'utils/mantle'
 import { CREATE_NOTE, FETCH_NOTES } from './reducer'
 
 const { bufferToHex0x } = Mantle.utils
@@ -41,7 +42,18 @@ export const fetchNotes = () => {
 export const createNote = ({ tag, msg, sharedWith = [] }) => {
   return async (dispatch, getState) => {
     try {
-      const { auth: { publicKey, address } } = getState()
+      const { users, auth: { publicKey, address } } = getState()
+
+      /* Add our stored users to the list of registered users. This is a bit of a redundant process,
+       * since our registered users are always equal to our full user list, but demonstrates how you
+       * can use mantle to store your registered user list for later querying */
+      users.forEach(({ addr }) => {
+        appMantle.registerUser(addr)
+      })
+
+      if (!appMantle.isUserRegistered(address)) {
+        throw new Error('Unauthorized')
+      }
 
       const symmetricKey = Mantle.createSymmetricKey()
       const encrypted = bufferToHex0x(
