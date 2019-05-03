@@ -8,13 +8,9 @@ USER node
 RUN mkdir /home/node/react
 WORKDIR /home/node/react
 
-COPY package.json package.json
+COPY package* ./
 
-ARG NPM_TOKEN
-
-RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc &&\
-  npm i &&\
-  rm ~/.npmrc
+RUN npm i
 
 COPY . /home/node/react/
 

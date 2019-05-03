@@ -1,6 +1,5 @@
 {
   "name": "mantle-demo-api",
-  "private": true,
   "version": "0.1.0",
   "description": "Mantle demo (API)",
   "main": "run.js",
@@ -31,7 +30,7 @@
     "@appliedblockchain/koa-docs": "^2.1.0",
     "@appliedblockchain/koa-healthcheck": "^1.2.0",
     "@appliedblockchain/mantle-api": "^1.1.0",
-    "@appliedblockchain/mantle-core": "^1.11.0",
+    "@appliedblockchain/mantle-core": "^1.14.0",
     "@koa/cors": "^2.2.1",
     "abi-decoder": "^1.2.0",
     "bunyan": "^1.8.12",
@@ -41,6 +40,6 @@
     "koa-joi-router": "^5.1.0",
     "koa-respond": "^1.0.1",
     "lodash": "^4.17.11",
-    "web3": "^1.0.0-beta.37"
+    "web3": "1.0.0-beta.37"
   }
 }
