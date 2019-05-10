@@ -1,5 +1,6 @@
 FROM node:10.12-alpine
 
+RUN echo 1
 RUN apk add --update --no-cache alpine-sdk git python openssl curl bash && \
   rm -rf /tmp/* /var/cache/apk/*
 

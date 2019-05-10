@@ -24,6 +24,7 @@ To deploy the app to docker locally:
 
  #### From /contracts:	
 
+> `npm i` \
 > `npm run compile` \
 > `npm run deploy`	
 

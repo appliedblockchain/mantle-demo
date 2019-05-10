@@ -1,8 +1,5 @@
 build
 
-/contracts/*
-!contracts/.gitkeep
-
 
 
 

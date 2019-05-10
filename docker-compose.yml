@@ -27,8 +27,7 @@ services:
     depends_on:
       - parity
   parity:
-    image: appliedblockchain/parity-solo-instant:latest
-    entrypoint: ["/parity/parity", "--config", "/solo/node.toml", "--unsafe-expose", "--gasprice", "1"]
+    image: appliedblockchain/parity-solo:latest
     restart: always
     volumes:
       - parity:/solo/chains
