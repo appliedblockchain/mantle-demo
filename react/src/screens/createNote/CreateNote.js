@@ -113,6 +113,9 @@ class CreateNote extends Component {
             <Typography variant="h4">Create a note</Typography>
           </Grid>
           <Grid item xs={10}>
+            <Typography variant="caption">Please select sharing preferences before creating your note</Typography>
+          </Grid>
+          <Grid item xs={10}>
             <Paper className={classes.paper}>
               <Formik
                 initialValues={{ tag: '', msg: '' }}

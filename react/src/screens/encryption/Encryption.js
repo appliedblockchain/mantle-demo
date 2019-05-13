@@ -83,12 +83,12 @@ class Encryption extends Component {
         <SideMenu />
         <Grid container justify="center" spacing={24}>
           <Grid item xs={10}>
-            <Typography variant="h4">Asymmetric Encryption</Typography>
+            <Typography variant="h4">Asymmetric Encryption Demo</Typography>
           </Grid>
           <Grid item xs={10}>
             <Paper className={classes.paper}>
               <Text>Account details</Text>
-
+              <Typography variant="caption">Click the key icons to copy your public or private key to your clipboard</Typography>
               <Tooltip title="Public key">
                 <IconButton onClick={this.copyPublicKey}>
                   <VpnKey />
