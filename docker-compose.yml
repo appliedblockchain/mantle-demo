@@ -17,6 +17,7 @@ services:
       - ./api/src/:/home/node/api/src
       - ./api/config/:/home/node/api/config
       - ./api/contracts/:/home/node/api/contracts
+      - /home/node/api/node_modules
     environment:
       NODE_ENV: staging
       NODE_PATH: .
